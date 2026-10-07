@@ -1,0 +1,107 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --paper: #f7f6f3;
+  --ink: #1d1b16;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background-color: var(--paper);
+  color: var(--ink);
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+::selection {
+  background: #0f5c4d;
+  color: #ffffff;
+}
+
+/* Visible, on-brand keyboard focus */
+:focus-visible {
+  outline: 2px solid #1f8a70;
+  outline-offset: 2px;
+  border-radius: 4px;
+}
+
+/* ---------- Buttons ---------- */
+@layer components {
+  .btn {
+    @apply inline-flex items-center justify-center gap-2 rounded-btn px-5 py-3 text-[15px] font-semibold transition-all duration-200 select-none;
+  }
+  .btn-primary {
+    @apply btn bg-brand text-white shadow-card hover:bg-brand-dark hover:shadow-lift hover:-translate-y-px active:translate-y-0;
+  }
+  .btn-secondary {
+    @apply btn border border-line bg-surface text-ink hover:border-brand/40 hover:bg-brand-soft/40;
+  }
+  .btn-light {
+    @apply btn bg-white text-brand-dark hover:bg-brand-soft;
+  }
+  .btn-outline-light {
+    @apply btn border border-white/30 text-white hover:bg-white/10;
+  }
+  .eyebrow {
+    @apply inline-flex items-center gap-2 rounded-full border border-line bg-surface px-3.5 py-1.5 text-[12.5px] font-semibold uppercase tracking-[0.08em] text-brand;
+  }
+  .card {
+    @apply rounded-card border border-line bg-surface shadow-card;
+  }
+  .demo-note {
+    @apply text-[11.5px] leading-relaxed text-ink-muted;
+  }
+}
+
+/* ---------- Scroll reveal ---------- */
+.reveal {
+  opacity: 0;
+  transform: translateY(18px);
+  transition:
+    opacity 0.65s cubic-bezier(0.22, 1, 0.36, 1),
+    transform 0.65s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.reveal-visible {
+  opacity: 1;
+  transform: none;
+}
+
+/* ---------- Mock UI scrollbars ---------- */
+.mock-scroll {
+  scrollbar-width: thin;
+  scrollbar-color: #d8d3c8 transparent;
+}
+.mock-scroll::-webkit-scrollbar {
+  height: 8px;
+  width: 8px;
+}
+.mock-scroll::-webkit-scrollbar-thumb {
+  background: #d8d3c8;
+  border-radius: 8px;
+}
+.mock-scroll::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  .reveal {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
